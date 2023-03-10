@@ -108,16 +108,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun fromDecimalToBinary(decimalNumber: String): String {
-        return decimalNumber.toInt(10).toString(2)
+        return decimalNumber.toLong(10).toString(2)
 
     }
 
     private fun fromDecimalToOctal(decimalNumber: String): String {
-        return decimalNumber.toInt(10).toString(8)
+        return decimalNumber.toLong(10).toString(8)
     }
 
     private fun fromDecimalToHex(decimalNumber: String): String {
-        return decimalNumber.toInt(10).toString(16)
+        return decimalNumber.toLong(10).toString(16)
     }
 
     private fun fromOctalToBinary(octalNumber: String): String {
