@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.binaryNumber.addTextChangedListener {
             if (binding.binaryNumber.isFocused) {
-                val binaryNumber = binding.binaryNumber.text.toString()
+                val binaryNumber = it.toString()
                 if (binaryNumber.isEmpty()) {
                     binding.decimalNumber.setText("")
                     binding.octalNumber.setText("")
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
                     binding.octalNumber.setText("")
                     binding.hexNumber.setText("")
                 } else {
-                    val decimalNumber = binding.decimalNumber.text.toString()
+                    val decimalNumber = it.toString()
                     binding.binaryNumber.setText(fromDecimalToBinary(decimalNumber))
                     binding.octalNumber.setText(fromDecimalToOctal(decimalNumber))
                     binding.hexNumber.setText(fromDecimalToHex(decimalNumber))
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.octalNumber.addTextChangedListener {
             if (binding.octalNumber.isFocused) {
-                val octalNumber = binding.octalNumber.text.toString()
+                val octalNumber = it.toString()
                 if (binding.octalNumber.text.isEmpty()) {
                     binding.binaryNumber.setText("")
                     binding.decimalNumber.setText("")
@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
                     binding.decimalNumber.setText("")
                     binding.octalNumber.setText("")
                 } else {
-                    val hexNumber = binding.hexNumber.text.toString()
+                    val hexNumber = it.toString()
                     binding.binaryNumber.setText(fromHexToBinary(hexNumber))
                     binding.decimalNumber.setText(fromHexToDecimal(hexNumber))
                     binding.octalNumber.setText(fromHexToOctal(hexNumber))
