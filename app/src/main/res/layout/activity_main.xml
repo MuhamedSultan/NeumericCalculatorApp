@@ -13,7 +13,7 @@
         android:layout_height="99dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="61dp"
-        app:layout_constraintBottom_toTopOf="@+id/binaryNumber"
+        app:layout_constraintBottom_toTopOf="@+id/ed_binaryNumber"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,14 +31,14 @@
         android:textColor="@color/black"
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/binaryNumber"
+        app:layout_constraintBottom_toTopOf="@+id/ed_binaryNumber"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/binaryNumber"
+        android:id="@+id/ed_binaryNumber"
         android:layout_width="370dp"
         android:layout_height="50dp"
         android:layout_marginTop="4dp"
@@ -46,12 +46,14 @@
         android:hint="@string/binary_number"
         android:inputType="number"
         android:padding="8dp"
+        android:maxLength="63"
+        android:digits="01"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/binary" />
 
     <EditText
-        android:id="@+id/decimalNumber"
+        android:id="@+id/ed_decimalNumber"
         android:layout_width="370dp"
         android:layout_height="50dp"
         android:layout_marginTop="4dp"
@@ -59,12 +61,13 @@
         android:hint="@string/decimal_number"
         android:inputType="number"
         android:padding="8dp"
+        android:maxLength="18"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/decimal" />
 
     <EditText
-        android:id="@+id/octalNumber"
+        android:id="@+id/ed_octalNumber"
         android:layout_width="370dp"
         android:layout_height="50dp"
         android:layout_marginTop="4dp"
@@ -72,18 +75,21 @@
         android:hint="@string/octal_number"
         android:inputType="number"
         android:padding="8dp"
+        android:maxLength="21"
+        android:digits="01234567"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/octal" />
 
     <EditText
-        android:id="@+id/hexNumber"
+        android:id="@+id/ed_hexNumber"
         android:layout_width="370dp"
         android:layout_height="50dp"
         android:layout_marginTop="4dp"
         android:background="@drawable/ed_background"
         android:hint="@string/hexDecimal_number"
         android:padding="8dp"
+        android:maxLength="15"
         android:digits="0123456789ABCDEFabcdef"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -100,7 +106,7 @@
         android:text="@string/binary_number"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/binaryNumber"
+        app:layout_constraintBottom_toTopOf="@+id/ed_binaryNumber"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.186"
         app:layout_constraintStart_toStartOf="parent"
@@ -119,7 +125,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.03"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/binaryNumber" />
+        app:layout_constraintTop_toBottomOf="@+id/ed_binaryNumber" />
 
     <TextView
         android:id="@+id/octal"
@@ -134,7 +140,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.066"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/decimalNumber" />
+        app:layout_constraintTop_toBottomOf="@+id/ed_decimalNumber" />
 
     <TextView
         android:id="@+id/hex"
@@ -149,7 +155,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.083"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/octalNumber" />
+        app:layout_constraintTop_toBottomOf="@+id/ed_octalNumber" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/clear"
@@ -164,7 +170,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hexNumber"
+        app:layout_constraintTop_toBottomOf="@+id/ed_hexNumber"
         app:layout_constraintVertical_bias="0.235" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

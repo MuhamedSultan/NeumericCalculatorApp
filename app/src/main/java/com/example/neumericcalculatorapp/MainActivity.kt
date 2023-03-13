@@ -2,7 +2,6 @@ package com.example.neumericcalculatorapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import com.example.neumericcalculatorapp.databinding.ActivityMainBinding
 
@@ -13,104 +12,85 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.binaryNumber.addTextChangedListener {
-            if (binding.binaryNumber.isFocused) {
-                val binaryNumber = it.toString()
+        binding.edBinaryNumber.addTextChangedListener {
+            val binaryNumber = it.toString()
+            if (binding.edBinaryNumber.isFocused) {
                 if (binaryNumber.isEmpty()) {
-                    binding.decimalNumber.setText("")
-                    binding.octalNumber.setText("")
-                    binding.hexNumber.setText("")
-                } else if (isBinaryNumber(binaryNumber)) {
-
-                    binding.decimalNumber.setText(fromBinaryToDecimal(binaryNumber))
-                    binding.octalNumber.setText(fromBinaryToOctal(binaryNumber))
-                    binding.hexNumber.setText(fromBinaryToHex(binaryNumber))
+                    checkBinaryIsEmpty()
                 } else {
-                    Toast.makeText(
-                        applicationContext,
-                        "enter binary numbers only",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    binding.edDecimalNumber.setText(fromBinaryToDecimal(binaryNumber))
+                    binding.edOctalNumber.setText(fromBinaryToOctal(binaryNumber))
+                    binding.edHexNumber.setText(fromBinaryToHex(binaryNumber))
                 }
             }
         }
 
-        binding.decimalNumber.addTextChangedListener {
+        binding.edDecimalNumber.addTextChangedListener {
 
-            if (binding.decimalNumber.isFocused) {
-                if (binding.decimalNumber.text.isEmpty()) {
-                    binding.binaryNumber.setText("")
-                    binding.octalNumber.setText("")
-                    binding.hexNumber.setText("")
+            if (binding.edDecimalNumber.isFocused) {
+                if (binding.edDecimalNumber.text.isEmpty()) {
+                    checkDecimalIsEmpty()
                 } else {
                     val decimalNumber = it.toString()
-                    binding.binaryNumber.setText(fromDecimalToBinary(decimalNumber))
-                    binding.octalNumber.setText(fromDecimalToOctal(decimalNumber))
-                    binding.hexNumber.setText(fromDecimalToHex(decimalNumber))
+                    binding.edBinaryNumber.setText(fromDecimalToBinary(decimalNumber))
+                    binding.edOctalNumber.setText(fromDecimalToOctal(decimalNumber))
+                    binding.edHexNumber.setText(fromDecimalToHex(decimalNumber))
                 }
             }
         }
 
-        binding.octalNumber.addTextChangedListener {
-            if (binding.octalNumber.isFocused) {
-                val octalNumber = it.toString()
-                if (binding.octalNumber.text.isEmpty()) {
-                    binding.binaryNumber.setText("")
-                    binding.decimalNumber.setText("")
-                    binding.hexNumber.setText("")
-                } else if (isOctalNumber(octalNumber)) {
-                    binding.binaryNumber.setText(fromOctalToBinary(octalNumber))
-                    binding.decimalNumber.setText(fromOctalToDecimal(octalNumber))
-                    binding.hexNumber.setText(fromOctalToHex(octalNumber))
+        binding.edOctalNumber.addTextChangedListener {
+            if (binding.edOctalNumber.isFocused) {
+                val edOctalNumber = it.toString()
+                if (binding.edOctalNumber.text.isEmpty()) {
+                    checkOctalIsEmpty()
                 } else {
-                    Toast.makeText(
-                        applicationContext,
-                        "octal number between 0 and 7",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    binding.edBinaryNumber.setText(fromOctalToBinary(edOctalNumber))
+                    binding.edDecimalNumber.setText(fromOctalToDecimal(edOctalNumber))
+                    binding.edHexNumber.setText(fromOctalToHex(edOctalNumber))
                 }
             }
         }
 
-        binding.hexNumber.addTextChangedListener {
-            if (binding.hexNumber.isFocused) {
-                if (binding.hexNumber.text.isEmpty()) {
-                    binding.binaryNumber.setText("")
-                    binding.decimalNumber.setText("")
-                    binding.octalNumber.setText("")
+        binding.edHexNumber.addTextChangedListener {
+            if (binding.edHexNumber.isFocused) {
+                if (binding.edHexNumber.text.isEmpty()) {
+                    checkHexDecimalIsEmpty()
                 } else {
-                    val hexNumber = it.toString()
-                    binding.binaryNumber.setText(fromHexToBinary(hexNumber))
-                    binding.decimalNumber.setText(fromHexToDecimal(hexNumber))
-                    binding.octalNumber.setText(fromHexToOctal(hexNumber))
+                    val edHexNumber = it.toString()
+                    binding.edBinaryNumber.setText(fromHexToBinary(edHexNumber))
+                    binding.edDecimalNumber.setText(fromHexToDecimal(edHexNumber))
+                    binding.edOctalNumber.setText(fromHexToOctal(edHexNumber))
                 }
             }
         }
 
         binding.clear.setOnClickListener {
-            binding.binaryNumber.setText("")
-            binding.decimalNumber.setText("")
-            binding.octalNumber.setText("")
-            binding.hexNumber.setText("")
+            binding.edBinaryNumber.text.clear()
+            binding.edDecimalNumber.text.clear()
+            binding.edOctalNumber.text.clear()
+            binding.edHexNumber.text.clear()
         }
     }
 
+
     private fun fromBinaryToDecimal(binaryNumber: String): String {
-        return binaryNumber.toInt(2).toString(10)
+        return binaryNumber.toLong(2).toString(10)
     }
 
     private fun fromBinaryToOctal(binaryNumber: String): String {
-        return binaryNumber.toInt(2).toString(8)
+        return binaryNumber.toLong(2).toString(8)
     }
 
     private fun fromBinaryToHex(binaryNumber: String): String {
-        return binaryNumber.toInt(2).toString(16)
+        return binaryNumber.toLong(2).toString(16)
     }
 
     private fun fromDecimalToBinary(decimalNumber: String): String {
         return decimalNumber.toLong(10).toString(2)
 
     }
+
 
     private fun fromDecimalToOctal(decimalNumber: String): String {
         return decimalNumber.toLong(10).toString(8)
@@ -120,47 +100,53 @@ class MainActivity : AppCompatActivity() {
         return decimalNumber.toLong(10).toString(16)
     }
 
-    private fun fromOctalToBinary(octalNumber: String): String {
-        return octalNumber.toInt(8).toString(2)
+    private fun fromOctalToBinary(edOctalNumber: String): String {
+        return edOctalNumber.toLong(8).toString(2)
     }
 
-    private fun fromOctalToDecimal(octalNumber: String): String {
-        return octalNumber.toInt(8).toString()
+    private fun fromOctalToDecimal(edOctalNumber: String): String {
+        return edOctalNumber.toLong(8).toString()
     }
 
-    private fun fromOctalToHex(octalNumber: String): String {
+    private fun fromOctalToHex(edOctalNumber: String): String {
 
-        return octalNumber.toInt(8).toString(16)
+        return edOctalNumber.toLong(8).toString(16)
     }
 
-    private fun fromHexToBinary(HexNumber: String): String {
-        return HexNumber.toInt(16).toString(2)
+    private fun fromHexToBinary(edHexNumber: String): String {
+        return edHexNumber.toLong(16).toString(2)
     }
 
-    private fun fromHexToDecimal(HexNumber: String): String {
-        return HexNumber.toInt(16).toString()
+    private fun fromHexToDecimal(edHexNumber: String): String {
+        return edHexNumber.toLong(16).toString()
     }
 
-    private fun fromHexToOctal(HexNumber: String): String {
-        return HexNumber.toInt(16).toString(8)
+    private fun fromHexToOctal(edHexNumber: String): String {
+        return edHexNumber.toLong(16).toString(8)
     }
 
-    private fun isBinaryNumber(binaryNumber: String): Boolean {
-        for (i in binaryNumber) {
-            if (i != '0' && i != '1') {
-                return false
-            }
-        }
-        return true
+    private fun checkDecimalIsEmpty() {
+        binding.edBinaryNumber.setText("")
+        binding.edOctalNumber.setText("")
+        binding.edHexNumber.setText("")
     }
 
-    private fun isOctalNumber(octalNumber: String): Boolean {
-        for (i in octalNumber) {
-            if (i !in '0'..'7') {
-                return false
-            }
-        }
-        return true
+    private fun checkBinaryIsEmpty() {
+        binding.edDecimalNumber.setText("")
+        binding.edOctalNumber.setText("")
+        binding.edHexNumber.setText("")
+    }
+
+    private fun checkOctalIsEmpty() {
+        binding.edBinaryNumber.setText("")
+        binding.edDecimalNumber.setText("")
+        binding.edHexNumber.setText("")
+    }
+
+    private fun checkHexDecimalIsEmpty() {
+        binding.edBinaryNumber.setText("")
+        binding.edDecimalNumber.setText("")
+        binding.edOctalNumber.setText("")
     }
 
 }
