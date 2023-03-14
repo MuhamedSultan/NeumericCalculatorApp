@@ -12,6 +12,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        convertBetweenNumericSystems()
+
+        clearAllFields()
+    }
+
+    private fun convertBetweenNumericSystems() {
         binding.edBinaryNumber.addTextChangedListener {
             val binaryNumber = it.toString()
             if (binding.edBinaryNumber.isFocused) {
@@ -64,15 +70,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
-        binding.clear.setOnClickListener {
-            binding.edBinaryNumber.text.clear()
-            binding.edDecimalNumber.text.clear()
-            binding.edOctalNumber.text.clear()
-            binding.edHexNumber.text.clear()
-        }
     }
-
 
     private fun fromBinaryToDecimal(binaryNumber: String): String {
         return binaryNumber.toLong(2).toString(10)
@@ -147,6 +145,15 @@ class MainActivity : AppCompatActivity() {
         binding.edBinaryNumber.setText("")
         binding.edDecimalNumber.setText("")
         binding.edOctalNumber.setText("")
+    }
+
+    private fun clearAllFields() {
+        binding.clear.setOnClickListener {
+            binding.edBinaryNumber.text.clear()
+            binding.edDecimalNumber.text.clear()
+            binding.edOctalNumber.text.clear()
+            binding.edHexNumber.text.clear()
+        }
     }
 
 }
